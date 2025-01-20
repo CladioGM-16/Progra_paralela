@@ -37,7 +37,7 @@ void mezclarBaraja(vector<Cartas>& baraja, int numHilos) {
     }
 
     for (auto& hilo : hilos) {
-        hilo.join(); // Esperar a que todos los hilos terminen
+        hilo.join(); 
     }
 }
 
@@ -65,7 +65,7 @@ void merge(vector<Cartas>& deck, int left, int mid, int right) {
     }
 }
 
-// Merge sort for a sub-deck
+// Merge 
 void sortSubDeck(vector<Cartas>& deck, int left, int right) {
     if (left < right) {
         int mid = left + (right - left) / 2;
