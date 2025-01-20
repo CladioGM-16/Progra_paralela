@@ -27,14 +27,20 @@ void mezclarBaraja(vector<Cartas>& baraja, int numHilos) {
 
     for (int t = 0; t < numHilos; ++t) {
         int inicio = t * tamPorcion;
-        int fin = (t == numHilos - 1) ? baraja.size() : inicio + tamPorcion;
+        int fin;
+        if (t == numHilos - 1) {
+            fin = baraja.size();
+        } else {
+            fin = inicio + tamPorcion;
+        }
         hilos.emplace_back(mezclarSubMazo, ref(baraja), inicio, fin);
     }
 
     for (auto& hilo : hilos) {
-        hilo.join();
+        hilo.join(); // Esperar a que todos los hilos terminen
     }
 }
+
 
 
 void merge(vector<Cartas>& deck, int left, int mid, int right) {
@@ -119,7 +125,7 @@ int main() {
     ordenarBaraja(baraja, 4);
     auto finOrden = high_resolution_clock::now();
     auto duracionOrden = duration_cast<milliseconds>(finOrden - inicioOrden).count();
-    cout << "\nTarea 2: Ordenación completa en " << duracionOrden << " ms." << endl;
+    cout << "\nTarea 2: OrdenaciÃ³n completa en " << duracionOrden << " ms." << endl;
 
     return 0;
 }
